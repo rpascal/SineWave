@@ -8,4 +8,9 @@ public class Sinusoid extends Polyline {
 		setVertices(vertices);
 		setPosition(origin.x, origin.y);
 	}
+	
+	public Vector2 getLastPoint(){
+		float[] p =getTransformedVertices().clone(); 
+		return new Vector2(p[p.length - 2], p[p.length - 1]);
+	}
 }
