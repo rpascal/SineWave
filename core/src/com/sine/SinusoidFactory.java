@@ -11,6 +11,7 @@ public class SinusoidFactory {
 	
 	public static Sinusoid createSinusoid(Vector2 origin, int waveLength, int maxAmplitude, int waveWidth ){
 		int amplitude = new Random().nextInt(maxAmplitude - MINAMPLITUDE + 1) + MINAMPLITUDE;
+		amplitude = 50;
 		return new Sinusoid(origin, getVertices(waveWidth, waveLength, amplitude), waveWidth, amplitude);
 	}
 	
@@ -22,7 +23,6 @@ public class SinusoidFactory {
 		if(waveLength %2 != 0)
 			waveLength++;
 		int twiceWaveLength = waveLength*2;
-		System.out.println(twiceWaveLength);
 		float[] points = new float[twiceWaveLength];
 		int x = -waveLength/2;
 		for (int i = 0, n = twiceWaveLength ; i < n ; i+=2) {
@@ -30,8 +30,6 @@ public class SinusoidFactory {
 			points[i+1] =sineFunction(x, waveWidth, amplitude);
 			x++;
 		}
-		System.out.println(x);
-		
 		return points;
 	}
 	

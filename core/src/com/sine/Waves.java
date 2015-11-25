@@ -27,7 +27,7 @@ public class Waves extends ApplicationAdapter {
        // cam.translate(cam.viewportWidth/2,cam.viewportHeight/2);
         cam.update();
 	    shapeRenderer = new ShapeRenderer();
-	    sineWave = SinusoidFactory.createSinusoid(new Vector2(0, 0),(int)w, 20, 4);
+	    sineWave = SinusoidFactory.createSinusoid(new Vector2(0, 0),(int)w, 20, 10);
 	  // cam.zoom = (float) .42;
 	    sineWave.rotate(90);
 	    System.out.println(sineWave.getLastPosition());
@@ -47,10 +47,11 @@ public class Waves extends ApplicationAdapter {
 
 		cam.update();
 		if(Gdx.input.isKeyJustPressed(Keys.A)){
-			sineWave.changeFlag = true;
+			sineWave.setAmplitude(10);
+	//		sineWave.setWaveWidth(2);
 		}
 		if(!Gdx.input.isKeyJustPressed(Keys.Q)){
-			int amountMove = -3;
+			int amountMove = -1;
 			cam.position.y += amountMove;
 			sineWave.updateWave(amountMove);
 		}

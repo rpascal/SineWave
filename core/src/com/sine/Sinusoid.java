@@ -6,7 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 public class Sinusoid extends Polyline {	
 	
 	float waveWidth, amplitude;
-	boolean changeFlag = false;
+	float tempAmplitude, tempWaveWidth;
+	boolean ampChange, waveWidthChange;
 	
 	public Sinusoid(Vector2 origin, float[] vertices, int waveWidth, int amplitude) {
 		this.amplitude = amplitude;
@@ -14,6 +15,9 @@ public class Sinusoid extends Polyline {
 		setVertices(vertices);
 		setPosition(origin.x, origin.y);
 		setOrigin(0, 0);
+		
+		ampChange = false;
+		waveWidthChange = false;
 	}
 	
 	public Vector2 getLastPosition(){
@@ -25,21 +29,46 @@ public class Sinusoid extends Polyline {
 		if(amountMove == 0)
 			return;
 		
-		if(changeFlag){
-			System.out.println("hgere " +  amplitude);
-			if(amplitude < 100){
-				amplitude += .5;
-			}else{
-				changeFlag = !changeFlag;
-			}
-			
-		}
+		adjustments();
 		
+		
+		System.out.println(waveWidth);
 		float oldRotation = getRotation();
 		setRotation(0);
 		setVertices(SinusoidFactory.updateVertices(amplitude, waveWidth, getTransformedVertices().clone(), amountMove));	
 		rotate(oldRotation);
 	}
 	
+	public void adjustments(){
+		if(ampChange)
+		adjustAmplitude();
+		if(waveWidthChange)
+		adjustWaveWidth();
+	}
+	private void adjustAmplitude(){
+		System.out.println(amplitude);
+		if(Math.abs(1-(amplitude/tempAmplitude)) < .01)
+			ampChange = false;
+		 float sign = (amplitude < tempAmplitude) ? 1 :  -1; 
+		 amplitude += sign*0.2;
+	}
+	private void adjustWaveWidth(){
+		if(Math.abs(1-(waveWidth/tempWaveWidth)) < .01)
+			waveWidthChange = false;
+		 float sign = (waveWidth < tempWaveWidth) ? 1 :  -1; 
+		 waveWidth += sign*.05;
+	}
+	
+
+	public void setWaveWidth(float waveWidth) {
+		this.tempWaveWidth = waveWidth;
+		waveWidthChange = true;
+	}
+
+	public void setAmplitude(float amplitude) {
+		this.tempAmplitude = amplitude;
+		ampChange = true;
+	}
+
 	
 }
