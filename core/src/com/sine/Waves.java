@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Vector2;
 
 
 public class Waves extends ApplicationAdapter {
@@ -24,14 +23,13 @@ public class Waves extends ApplicationAdapter {
         float h = Gdx.graphics.getHeight();
         System.out.println(w);
         cam = new OrthographicCamera(w,h);
-       // cam.translate(cam.viewportWidth/2,cam.viewportHeight/2);
         cam.update();
 	    shapeRenderer = new ShapeRenderer();
-	    sineWave = SinusoidFactory.createSinusoid(new Vector2(0, 0),(int)w, 20, 10);
-	  // cam.zoom = (float) .42;
-	    sineWave.rotate(90);
-	    System.out.println(sineWave.getLastPosition());
-	    
+
+	    sineWave = SinusoidFactory.createSinusoid(WavePositions.HORIZONTALTOP);
+
+	    // cam.translate(cam.viewportWidth/2,cam.viewportHeight/2);
+	     //cam.zoom = (float) 1.2;
 	}
 	
 	@Override
@@ -46,15 +44,15 @@ public class Waves extends ApplicationAdapter {
 	public void render () {
 
 		cam.update();
-		if(Gdx.input.isKeyJustPressed(Keys.A)){
-			sineWave.setAmplitude(10);
-	//		sineWave.setWaveWidth(2);
-		}
-		if(!Gdx.input.isKeyJustPressed(Keys.Q)){
-			int amountMove = -1;
-			cam.position.y += amountMove;
-			sineWave.updateWave(amountMove);
-		}
+//		if(Gdx.input.isKeyJustPressed(Keys.A)){
+//			sineWave.setAmplitude(10);
+//	//		sineWave.setWaveWidth(2);
+//		}
+//		if(!Gdx.input.isKeyJustPressed(Keys.Q)){
+//			int amountMove = 0;
+//			cam.position.y += amountMove;
+//			sineWave.updateWave(amountMove);
+//		}
 			
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		Gdx.gl.glClearColor(1, 1, 1, 1);

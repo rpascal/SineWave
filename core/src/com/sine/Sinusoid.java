@@ -9,13 +9,10 @@ public class Sinusoid extends Polyline {
 	float tempAmplitude, tempWaveWidth;
 	boolean ampChange, waveWidthChange;
 	
-	public Sinusoid(Vector2 origin, float[] vertices, int waveWidth, int amplitude) {
+	public Sinusoid(int waveWidth, int amplitude) {
 		this.amplitude = amplitude;
 		this.waveWidth = waveWidth;
-		setVertices(vertices);
-		setPosition(origin.x, origin.y);
-		setOrigin(0, 0);
-		
+		setOrigin(0,0);
 		ampChange = false;
 		waveWidthChange = false;
 	}
